@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class Note extends Equatable {
+class NoteItem extends Equatable {
   final String id;
   final String title;
   final String text;
 
-  Note({
+  NoteItem({
     required this.id,
     required this.title,
     required this.text,
