@@ -10,6 +10,3 @@ void main() {
     child: NotesApp(),
   ));
 }
-
-// ignore: must_be_immutable
-

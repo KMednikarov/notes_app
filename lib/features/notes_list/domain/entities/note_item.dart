@@ -5,11 +5,13 @@ class NoteItem extends Equatable {
   final String id;
   final String title;
   final String text;
+  final Color color;
 
   NoteItem({
     required this.id,
     required this.title,
     required this.text,
+    required this.color,
   });
 
   @override
