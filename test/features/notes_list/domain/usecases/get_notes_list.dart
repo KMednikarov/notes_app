@@ -4,7 +4,4 @@ import 'package:notes_app/features/notes_list/domain/usecases/get_notes_list.dar
 
 class MockNotesListRepository extends Mock implements NotesListRepository {}
 
-void main(List<String> args) {
-  GetNotesList usecase = GetNotesList();
-  MockNotesListRepository repository;
-}
+void main(List<String> args) {}
