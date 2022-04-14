@@ -6,3 +6,17 @@ abstract class NotesListEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetNotesListEvent extends NotesListEvent {}
+
+class SaveNoteEvent extends NotesListEvent {
+  final String title;
+  final String text;
+  final Color color;
+
+  SaveNoteEvent({
+    required this.title,
+    required this.text,
+    required this.color,
+  });
+}

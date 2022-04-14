@@ -31,13 +31,14 @@ class Note extends NoteItem {
         'text': text,
         'color': categoryColor.value,
       };
-
   static String encode(List<Note> notes) => json.encode(
         notes.map<Map<String, dynamic>>((note) => note.toJson()).toList(),
       );
 
-  static List<Note> decode(String notes) =>
-      (json.decode(notes) as List<dynamic>)
-          .map<Note>((item) => Note.fromJson(item))
-          .toList();
+  static List<Note> decode(String notes) {
+    final decoded = jsonDecode(notes);
+    return (json.decode(decoded) as List<dynamic>)
+        .map<Note>((item) => Note.fromJson(item))
+        .toList();
+  }
 }

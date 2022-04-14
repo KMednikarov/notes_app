@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:notes_app/core/base/failures.dart';
+import 'package:notes_app/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:notes_app/core/base/use_case.dart';
 import 'package:notes_app/features/notes_list/domain/entities/note_item.dart';

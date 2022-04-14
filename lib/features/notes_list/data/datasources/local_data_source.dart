@@ -1,12 +1,13 @@
 import 'dart:convert';
 
+import 'package:notes_app/core/errors/exceptions.dart';
 import 'package:notes_app/features/notes_list/data/models/note.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LocalDataSource {
   final String _notesListKey = "notes_list_sp_key";
   Future<List<Note>> getNotes();
-  Future<void> saveNotes(List<Note> notes);
+  Future<bool> saveNotes(List<Note> notes);
 }
 
 class LocalDataSourceImpl extends LocalDataSource {
@@ -16,16 +17,17 @@ class LocalDataSourceImpl extends LocalDataSource {
 
   @override
   Future<List<Note>> getNotes() {
-    final jsonString = sharedPreferences.getString("saved_notes");
+    final jsonString = sharedPreferences.getString(_notesListKey);
     if (jsonString != null) {
-      return Future.value(json.decode(jsonString));
+      final notes = Note.decode(jsonString);
+      return Future.value(notes);
     } else {
-      throw UnimplementedError();
+      throw CacheException();
     }
   }
 
   @override
-  Future<void> saveNotes(List<Note> notes) {
+  Future<bool> saveNotes(List<Note> notes) {
     return sharedPreferences.setString(
       _notesListKey,
       json.encode(Note.encode(notes)),

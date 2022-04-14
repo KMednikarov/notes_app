@@ -21,6 +21,12 @@ class NotesListFound extends NotesListState {
   List<Object> get props => [notesList];
 }
 
+class NoteSaved extends NotesListState {
+  final bool success;
+
+  NoteSaved({required this.success});
+}
+
 class NotesListError extends NotesListState {
   final String message;
 

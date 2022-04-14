@@ -1,7 +1,8 @@
+import 'package:notes_app/core/errors/exceptions.dart';
 import 'package:notes_app/features/notes_list/data/datasources/local_data_source.dart';
 import 'package:notes_app/features/notes_list/data/models/note.dart';
 import 'package:notes_app/features/notes_list/domain/entities/note_item.dart';
-import 'package:notes_app/core/base/failures.dart';
+import 'package:notes_app/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:notes_app/features/notes_list/domain/repositories/notes_list_repository.dart';
 
@@ -15,18 +16,18 @@ class NotesListRepositoryImpl extends NotesListRepository {
     try {
       _notes = await localDataSource.getNotes();
       return Right(_notes);
-    } on Exception {
+    } on CacheException {
       return Left(CacheFailure());
     }
   }
 
   @override
-  Future<void> saveNotesList() {
+  Future<bool> saveNotesList() {
     return localDataSource.saveNotes(_notes);
   }
 
   @override
-  Future<void> saveNotes(NoteItem note) {
+  Future<bool> saveNotes(NoteItem note) {
     Note newNote = Note(
         id: DateTime.now().toIso8601String(),
         text: note.text,
